@@ -1,6 +1,16 @@
 import streamlit as st
+from PIL import Image
 
-# Function for the "Rules" tab
+# Load the logo image
+logo = Image.open('A_sleek,_modern_logo_design_for_a_card_game_app_na.png')
+
+# Function for the landing page
+def landing_page():
+    st.title("Welcome to Continental")
+    st.image(logo, use_column_width=True)
+    st.write("Get ready to play the ultimate card game experience. Navigate through the menu to read the rules, start a new game, or view your stats!")
+
+# Function for the "Rules" page
 def show_rules():
     st.title("Game Rules")
     st.write("""
@@ -14,7 +24,7 @@ def show_rules():
     You can customize these rules based on the specific game you are developing.
     """)
 
-# Function for the "New Game" tab
+# Function for the "New Game" page
 def new_game():
     st.title("Start a New Game")
     
@@ -27,7 +37,7 @@ def new_game():
         st.write("Game logic goes here...")
         # Here, you would insert the logic to initialize and play the game
 
-# Function for the "Stats" tab
+# Function for the "Stats" page
 def show_stats():
     st.title("Game Statistics")
     st.write("This section will show the game statistics.")
@@ -45,17 +55,20 @@ def show_stats():
     
     # Here you can insert code to display more detailed statistics
 
-# Streamlit app structure
+# Streamlit app structure using the page function
 def main():
+    pages = {
+        "Landing Page": landing_page,
+        "Rules": show_rules,
+        "New Game": new_game,
+        "Stats": show_stats
+    }
+
     st.sidebar.title("Game Menu")
-    tab = st.sidebar.radio("Navigate", ["Rules", "New Game", "Stats"])
-    
-    if tab == "Rules":
-        show_rules()
-    elif tab == "New Game":
-        new_game()
-    elif tab == "Stats":
-        show_stats()
+    selection = st.sidebar.radio("Navigate", list(pages.keys()))
+
+    # Run the selected page function
+    pages[selection]()
 
 if __name__ == "__main__":
     main()
