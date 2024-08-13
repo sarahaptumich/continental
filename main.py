@@ -22,5 +22,4 @@ st.image('continental_logo.png')
 
 st.sidebar.markdown("What is Continental")
 st.sidebar.image('continental_logo.png', use_column_width=True)
-st.sidebar.write('Continental is a fun family friendly \\
-                  card game that can be enjoy by the entire family. This site will explain how to play and can also serve to keep track of games.   ')
+st.sidebar.write('Continental is a fun family friendly card game that can be enjoy by the entire family. This site will explain how to play and can also serve to keep track of games.   ')
