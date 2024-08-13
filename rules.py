@@ -63,3 +63,8 @@ def show_rules():
     "Sixth game: With eleven cards, a trio and two straights.",
     "Seventh game: With twelve cards, three straights."]
     st.write("\n".join(f"- {point}" for point in bullet_points_3))
+    st.subheader("Penalty Cards", divider="red")
+    st.write(""" In Continental, players can take another player's discard, if two or more players want the same card the order of precendent is clockwise. 
+                 If the player who takes the discarded card is the one whose turn it is, play continues as normal. If it is someone else, they must also take 
+                 a penalty card from the stack. This double draw can cause a player, after making the combinations, to have uncombined cards left in his hand. The player who discarded
+                 the card can not take it back""")
