@@ -44,4 +44,10 @@ def show_rules():
     st.write("\n".join(f"- {point}" for point in bullet_points))
     st.write(""" When someone closes, each player proceeds to record the value of the cards remaining in their hand. The cards are then collected and the turn of distribution passes to the next player,
     who will give the corresponding cards, and so on. At the end of the last hand, the player with the fewest accumulated points will be the winner of the game. """)
+    st.subheader("Plays or combinations", divider="red")
+    st.write("Players can make the following two combinations")
+    bullet_points_2=[
+    "Three of a kind: Three cards of the same index, regardless of suit."
+    "Runs: Four consecutive cards of the same suit."]
+    st.write("\n".join(f"- {point}" for point in bullet_points_2))
 
