@@ -8,4 +8,8 @@ def show_rules():
     """)
     st.subheader("Game Objective", divider="red")
     st.write("""Link the cards in established
-    combinations and expose them, scoring the cards that remain in the hand, combined or not. Whoever has the fewest points at the end of the game wins the game.""")
+                combinations and expose them, scoring the cards that remain in the hand, combined or not. Whoever has the fewest points at the end of the game wins the game.""")
+    st.subheader("Deck of Cards", divider="red")
+    st.write("""Continental is played with various 52-card Spanish poker decks, although English poker decks with the same number of cards are also accepted.
+                 Two jokers are necessary per deck. For four players, you have to     start with two decks and end with three. For five to eight players,
+                 it is advisable to start with two decks, adding one after the first two partial games and another after the next two.""")
