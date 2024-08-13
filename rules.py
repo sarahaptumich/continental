@@ -30,9 +30,9 @@ def show_rules():
                 cut them and distribute six to each player, one at a time, clockwise. Then the top card from the deck is revealed and the game begings """)
     st.subheader("Start and run of the game", divider="red")
     st.write("""Each player, in their turn starting by the dealer, can take the face-up card from the pool or the top card from the deck. 
-    He ends his turn by discarding one of his cards, which he will leave on the pot. If he does not take the card from the pool, any of the following players may do so with clockwise priority
-    , but also drawing the top one as punishment. During his turn, the player who has the combinations that correspond to the game in progress can expose them, event is he does not close the
-    game.""")
+    He ends his turn by discarding one of his cards, which he will leave on the pot. If he does not take the card from the pool, any of the following players may do so
+    with clockwise priority, but also drawing the top one as punishment. During his turn, the player who has the combinations that correspond to the game in progress
+    can expose them, event is he does not close the     game.""")
     st.write("The advantages of displaying the combined cards are:")
     bullet_points = [
         "Decrease the penalty points if someone closes.",
@@ -42,13 +42,23 @@ def show_rules():
         "On the other hand, exposing has the disadvantage of facilitating the closure of another player."
     ]
     st.write("\n".join(f"- {point}" for point in bullet_points))
-    st.write(""" When someone closes, each player proceeds to record the value of the cards remaining in their hand. The cards are then collected and the turn of distribution passes to the next player,
-    who will give the corresponding cards, and so on. At the end of the last hand, the player with the fewest accumulated points will be the winner of the game. """)
+    st.write(""" When someone closes, each player proceeds to record the value of the cards remaining in their hand. The cards are then collected and the turn of distribution
+    passes to the next player,     who will give the corresponding cards, and so on. At the end of the last hand, the player with the fewest accumulated points will be the winner
+    of the game. """)
     st.subheader("Plays or combinations", divider="red")
     st.write("Players can make the following two combinations")
     bullet_points_2=[
-    "Three of a kind: Three cards of the same index, regardless of suit.",
-    "Runs: Four consecutive cards of the same suit."]
+    "Three of a kind (TK): Three cards of the same index, regardless of suit.",
+    "Straight: Four consecutive cards of the same suit."]
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
     st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, but not a trio of jokers."""
-
+    st.writer(""" In Continental, the moves that must be made are fixed and the order in which they must be played is as explained below:""")
+    bullet_points_3=[
+    "First game: Six cards are dealt and two TK must be made.",
+    "Second game: Seven cards are dealt and you have to make a TK and a straight.",
+    "Third game: With eight cards, two straights.",
+    "Fourth game: Dealing nine cards, three TK.",
+    "Fifth game: Ten cards are dealt to make two TK and a straight.",
+    "Sixth game: With eleven cards, a trio and two straights.",
+    "Seventh game: With twelve cards, three straights."]
+    st.write("\n".join(f"- {point}" for point in bullet_points_3))
