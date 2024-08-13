@@ -53,7 +53,7 @@ def show_rules():
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
     st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, 
     but not a trio of jokers.""")
-    st.writer(""" In Continental, the moves that must be made are fixed and the order in which they must be played is as explained below:""")
+    st.write(""" In Continental, the moves that must be made are fixed and the order in which they must be played is as explained below:""")
     bullet_points_3=[
     "First game: Six cards are dealt and two TK must be made.",
     "Second game: Seven cards are dealt and you have to make a TK and a straight.",
