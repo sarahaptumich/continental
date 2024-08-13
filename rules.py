@@ -51,7 +51,8 @@ def show_rules():
     "Three of a kind (TK): Three cards of the same index, regardless of suit.",
     "Straight: Four consecutive cards of the same suit."]
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
-    st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, but not a trio of jokers."""
+    st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, 
+    but not a trio of jokers.""")
     st.writer(""" In Continental, the moves that must be made are fixed and the order in which they must be played is as explained below:""")
     bullet_points_3=[
     "First game: Six cards are dealt and two TK must be made.",
