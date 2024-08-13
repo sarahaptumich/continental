@@ -70,4 +70,6 @@ def show_rules():
                  the card can not take it back""")
     st.subheader("Closing a round", divider="red")
     st.write(""" A player closes the round when he was able to combined all his cards. At that point the other players must count all cards using the points' system and recorded it. 
-                 At the end of all seven round the winner is the person with the least points""")
+                 """)
+    st.subheader("End of the Game", divider="red")
+    st.write("""At the end of all seven round the winner is the person with the least points.""")
