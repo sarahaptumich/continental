@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 
 # Load the logo image
-logo = Image.open('A_sleek,_modern_logo_design_for_a_card_game_app_na.png')
+logo = Image.open('continental_logo.png')
 
 # Function for the landing page
 def landing_page():
