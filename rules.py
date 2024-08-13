@@ -7,3 +7,5 @@ def show_rules():
     each deal are fixed and it is possible to take another player's discard out of turn, taking another extra or "punishment" card when doing so.
     """)
     st.subheader("Game Objective", divider="red")
+    st.write("""Link the cards in established
+    combinations and expose them, scoring the cards that remain in the hand, combined or not. Whoever has the fewest points at the end of the game wins the game.""")
