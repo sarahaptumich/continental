@@ -22,13 +22,15 @@ def main():
         "Stats": show_stats
     }
 
-    st.sidebar.markdown("What is Continental")
+    st.sidebar.markdown("### What is Continental?")
     st.sidebar.image('continental_logo.png', use_column_width=True)
-    st.sidebar.write('Continental is a fun family friendly card game that can be enjoy by the entire family. This site will explain how to play and can also serve to keep track of games.   ')
+    st.sidebar.write('Continental is a fun, family-friendly card game that can be enjoyed by everyone. This site will explain how to play and can also serve to keep track of games.')
+
+    # Capture the user's choice from the sidebar
+    selection = st.sidebar.radio("Navigate", list(pages.keys()))
 
     # Run the selected page function from the respective module
     pages[selection]()
 
 if __name__ == "__main__":
     main()
-
