@@ -33,13 +33,14 @@ def show_rules():
     He ends his turn by discarding one of his cards, which he will leave on the pot. If he does not take the card from the pool, any of the following players may do so with clockwise priority
     , but also drawing the top one as punishment. During his turn, the player who has the combinations that correspond to the game in progress can expose them, event is he does not close the
     game. 
-   The advantages of displaying the combined cards are:
+    
+    The advantages of displaying the combined cards are:
 
-    -Decrease the penalty points if someone closes.
-    -Being able to place the uncombined cards in the exposed foreign combinations, without being able to undo and divide the ladders and without putting repeated cards in these.
-    -Be able to use exposed wildcards. After knocking down, any player can replace an exposed wild card with the card it represents and can use it on any other ladder. 
-    -The only reason to place it in another trio is to not be able to be used by other players.
-    -On the other hand, exposing has the disadvantage of facilitating the closure of another player.
+    - Decrease the penalty points if someone closes.
+    - Being able to place the uncombined cards in the exposed foreign combinations, without being able to undo and divide the ladders and without putting repeated cards in these.
+    - Be able to use exposed wildcards. After knocking down, any player can replace an exposed wild card with the card it represents and can use it on any other ladder. 
+    - The only reason to place it in another trio is to not be able to be used by other players.
+    - On the other hand, exposing has the disadvantage of facilitating the closure of another player.
 
-When someone closes, each player proceeds to record the value of the cards remaining in their hand. The cards are then collected and the turn of distribution passes to the next player,
-who will give the corresponding cards, and so on. At the end of the last hand, the player with the fewest accumulated points will be the winner of the game. """)
+    When someone closes, each player proceeds to record the value of the cards remaining in their hand. The cards are then collected and the turn of distribution passes to the next player,
+    who will give the corresponding cards, and so on. At the end of the last hand, the player with the fewest accumulated points will be the winner of the game. """)
