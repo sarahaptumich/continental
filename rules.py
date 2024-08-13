@@ -50,4 +50,5 @@ def show_rules():
     "Three of a kind: Three cards of the same index, regardless of suit.",
     "Runs: Four consecutive cards of the same suit."]
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
+    st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, but not a trio of jokers."""
 
