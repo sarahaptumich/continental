@@ -25,3 +25,6 @@ def show_rules():
     }
     df = pd.DataFrame(data)
     st.table(df)
+    st.subheader("Distribution of the cards", divider="red")
+    st.write("""Cards are drawn to determine who will be the player to start the game as dealer. The dealer will shuffle them, cut them and distribute six to each player,
+                one at a time, clockwise. Then the top card from the deck is revealed and the game begings """)
