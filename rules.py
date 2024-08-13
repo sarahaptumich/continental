@@ -13,3 +13,5 @@ def show_rules():
     st.write("""Continental is played with various 52-card Spanish poker decks, although English poker decks with the same number of cards are also accepted.
                  Two jokers are necessary per deck. For four players, you have to     start with two decks and end with three. For five to eight players,
                  it is advisable to start with two decks, adding one after the first two partial games and another after the next two.""")
+    st.subheader("Number of players", divider="red")
+    st.write("""From two to eight players and the game is always individual, without forming pairs or teams.""")
