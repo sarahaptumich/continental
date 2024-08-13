@@ -53,7 +53,7 @@ def show_rules():
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
     st.write("""The wild card or joker is a special card that replaces any other card in the deck. You can make a trio with two jokers and a natural card, 
     but not a trio of jokers.""")
-    st.write(""" In Continental, the moves that must be made are fixed and the order in which they must be played is as explained below:""")
+    st.write(""" In Continental, the rounds that must be made are fixed and the order in which they must be played is as explained below:""")
     bullet_points_3=[
     "First game: Six cards are dealt and two TK must be made.",
     "Second game: Seven cards are dealt and you have to make a TK and a straight.",
@@ -68,3 +68,6 @@ def show_rules():
                  If the player who takes the discarded card is the one whose turn it is, play continues as normal. If it is someone else, they must also take 
                  a penalty card from the stack. This double draw can cause a player, after making the combinations, to have uncombined cards left in his hand. The player who discarded
                  the card can not take it back""")
+    st.subheader("Closing a round", divider="red")
+    st.write(""" A player closes the round when he was able to combined all his cards. At that point the other players must count all cards using the points' system and recorded it. 
+                 At the end of all seven round the winner is the person with the least points""")
