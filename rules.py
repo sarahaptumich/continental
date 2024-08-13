@@ -47,7 +47,7 @@ def show_rules():
     st.subheader("Plays or combinations", divider="red")
     st.write("Players can make the following two combinations")
     bullet_points_2=[
-    "Three of a kind: Three cards of the same index, regardless of suit."
+    "Three of a kind: Three cards of the same index, regardless of suit.",
     "Runs: Four consecutive cards of the same suit."]
     st.write("\n".join(f"- {point}" for point in bullet_points_2))
 
