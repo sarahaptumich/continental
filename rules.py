@@ -20,7 +20,7 @@ def show_rules():
     st.write("""The order of the cards is the usual one, from ace to king consecutively. The value of the cards is as follows:""")
 
     data = {
-    "Card": ["Wild Card", "Ace", "K, Q, J, 10, 9 and 8", "7, 6, 5, 4, 3 and 2"],
+    "Cards": ["Wild Card", "Ace", "K, Q, J, 10, 9 and 8", "7, 6, 5, 4, 3 and 2"],
     "Points": ["50 Points", "20 Points", "10 Points", "5 Points"]
     }
     df = pd.DataFrame(data)
