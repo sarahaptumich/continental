@@ -1,25 +1,34 @@
 import streamlit as st
-from st_pages import Page, show_pages, add_page_title
-import pandas as pd
-import numpy as np
+from PIL import Image
+from rules import show_rules
+from new_game import new_game
+from stats import show_stats
 
-#add_page_title()
+# Load the logo image
+logo = Image.open('continental_logo.png')
 
-show_pages(
-    [
-        Page(r'main.py', "Home"),
-        Page(r'rules.py', "Rules"),
-        Page(r'new_game.py', "New Game"),
-        Page(r'stats.py', "Statistics"),
-    ]
-)
+# Function for the landing page
+def landing_page():
+    st.title("Welcome to Continental")
+    st.image(logo, use_column_width=True)
+    st.write("Get ready to play the ultimate card game experience. Navigate through the menu to read the rules, start a new game, or view your stats!")
 
-st.title('Welcome to Continental!')
-st.divider()
-st.subheader('The ultimate card game')
-st.write('Get ready to play the ultimate card game experience. Navigate through the menu to read the rules, start a new game, or view your stats!')
-st.image('continental_logo.png')
+# Streamlit app structure using page imports
+def main():
+    pages = {
+        "Landing Page": landing_page,
+        "Rules": show_rules,
+        "New Game": new_game,
+        "Stats": show_stats
+    }
 
-st.sidebar.markdown("What is Continental")
-st.sidebar.image('continental_logo.png', use_column_width=True)
-st.sidebar.write('Continental is a fun family friendly card game that can be enjoy by the entire family. This site will explain how to play and can also serve to keep track of games.   ')
+    st.sidebar.markdown("What is Continental")
+    st.sidebar.image('continental_logo.png', use_column_width=True)
+    st.sidebar.write('Continental is a fun family friendly card game that can be enjoy by the entire family. This site will explain how to play and can also serve to keep track of games.   ')
+
+    # Run the selected page function from the respective module
+    pages[selection]()
+
+if __name__ == "__main__":
+    main()
+
