@@ -15,3 +15,5 @@ def show_rules():
                  it is advisable to start with two decks, adding one after the first two partial games and another after the next two.""")
     st.subheader("Number of players", divider="red")
     st.write("""From two to eight players and the game is always individual, without forming pairs or teams.""")
+    st.subheader("Order and value of cards", divider="red")
+    st.write("""The order of the cards is the usual one, from ace to king consecutively. The value of the cards is as follows:""")
