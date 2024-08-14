@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import uuid
 
 # Function to add a new game
 def new_game():
