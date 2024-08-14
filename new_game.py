@@ -21,18 +21,27 @@ def new_game():
     rounds = [f"Round {i+1}" for i in range(7)]
     results = {}
     
-    for player in players:
-        results[player] = {}
-        for rnd in rounds:
-            points = st.number_input(f"Points for {player} in {rnd}", min_value=0, step=1)
-            results[player][rnd] = points
+    # for player in players:
+    #     results[player] = {}
+    #     for rnd in rounds:
+    #         points = st.number_input(f"Points for {player} in {rnd}", min_value=0, step=1)
+    #         results[player][rnd] = points
+
+    for rnd in rounds:
+        results[rnd] = {}
+        for player in players:
+            points = st.number_input(f"Points for {rnd}  in  {player}", min_value=0, step=5)
     
     if st.button("Save Game"):
         # Create a DataFrame to store the results
         data = {"Game ID": game_id}
-        for player in players:
-            for rnd in rounds:
-                data[f"{player} - {rnd}"] = results[player][rnd]
+        # for player in players:
+        #     for rnd in rounds:
+        #         data[f"{player} - {rnd}"] = results[player][rnd]
+
+        for rnd in rounds:
+            for player in players:
+                data[f"{rnd} - {player}"] = results[rnd][player]
         
         df = pd.DataFrame([data])
         
