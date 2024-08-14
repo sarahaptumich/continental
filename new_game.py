@@ -6,6 +6,9 @@ import os
 def start_new_game():
     game_id = str(uuid.uuid4())
     st.write(f"Game ID: {game_id}")
+    with st.form("new_game_form"):
+        # Input for the number of players
+        num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
     
 
 def new_game():
