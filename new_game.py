@@ -3,7 +3,7 @@ import pandas as pd
 import uuid
 import os
 
-# Initialize a global session state for tracking rounds, scores, and game ID
+# Initialize all necessary session state variables
 if 'round' not in st.session_state:
     st.session_state.round = 1
 if 'scores' not in st.session_state:
@@ -33,5 +33,10 @@ def new_game():
         if st.session_state.game_id:
             st.write(f"Game ID: {st.session_state.game_id}")
             
-    
+            # Input fields for Player Names
+            num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
+            
+            if not st.session_state.players:
+                st.session_state.players = [st.text_input(f"Enter name for Player {i+1}") for i in
+
 
