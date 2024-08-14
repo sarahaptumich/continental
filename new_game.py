@@ -9,6 +9,7 @@ def start_new_game():
     with st.form("new_game_form"):
         # Input for the number of players
         num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
+        submit = st.form_submit_button("Start Game")
     
 
 def new_game():
