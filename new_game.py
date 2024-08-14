@@ -31,6 +31,7 @@ def new_game():
         results[rnd] = {}
         for player in players:
             points = st.number_input(f"Points for {rnd}  in  {player}", min_value=0, step=5)
+            results[rnd][player] = points
     
     if st.button("Save Game"):
         # Create a DataFrame to store the results
