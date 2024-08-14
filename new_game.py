@@ -14,7 +14,7 @@ def start_new_game():
     for i in range(int(num_players)):
         player_name = st.text_input(f"Enter name for Player {i+1}", f"Player {i+1}")
         players.append(player_name)
-    submit = st.form_submit_button("Start Game")
+
     
 
 def new_game():
