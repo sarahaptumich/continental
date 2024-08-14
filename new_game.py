@@ -6,8 +6,9 @@ import os
 def new_game():
     st.title("Add a New Game")
     
-    # Input fields for Game ID and Player Names
-    game_id = st.text_input("Enter Game ID", "")
+   # Generate a unique Game ID
+    game_id = str(uuid.uuid4())
+    st.write(f"Game ID: {game_id}")
     
     num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
     
