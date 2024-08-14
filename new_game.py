@@ -4,16 +4,17 @@ import uuid
 import os
 
 # Initialize session state variables
-if 'game_state' not in st.session_state:
-    st.session_state.game_state = 'start'  # start, players, game
-if 'round' not in st.session_state:
-    st.session_state.round = 1
-if 'scores' not in st.session_state:
-    st.session_state.scores = {}
-if 'game_id' not in st.session_state:
-    st.session_state.game_id = None
-if 'players' not in st.session_state:
-    st.session_state.players = []
+def initialize_session_state():
+    if 'game_state' not in st.session_state:
+        st.session_state.game_state = 'start'  # start, players, game
+    if 'round' not in st.session_state:
+        st.session_state.round = 1
+    if 'scores' not in st.session_state:
+        st.session_state.scores = {}
+    if 'game_id' not in st.session_state:
+        st.session_state.game_id = None
+    if 'players' not in st.session_state:
+        st.session_state.players = []
 
 # Function to reset session state and start a new game
 def start_new_game():
@@ -85,6 +86,8 @@ def play_game():
 
 # Main new_game function handling all the logic on the new_game page
 def new_game():
+    initialize_session_state()
+    
     if st.session_state.game_state == 'start':
         st.title("Continental Card Game")
         if st.button("Start New Game"):
@@ -97,3 +100,4 @@ def new_game():
 # Example usage within a Streamlit app
 if __name__ == "__main__":
     new_game()
+
