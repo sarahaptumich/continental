@@ -83,8 +83,8 @@ def play_game():
     tally_df = pd.DataFrame(list(tally_data.items()), columns=["Player", "Total Points"])
     st.write(tally_df)
 
-# Main application logic
-def main():
+# Main new_game function handling all the logic on the new_game page
+def new_game():
     if st.session_state.game_state == 'start':
         st.title("Continental Card Game")
         if st.button("Start New Game"):
@@ -94,5 +94,6 @@ def main():
     elif st.session_state.game_state == 'game':
         play_game()
 
+# Example usage within a Streamlit app
 if __name__ == "__main__":
-    main()
+    new_game()
