@@ -9,11 +9,12 @@ def start_new_game():
     with st.form("new_game_form"):
         # Input for the number of players
         num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
-        players = []
-        for i in range(int(num_players)):
-            player_name = st.text_input(f"Enter name for Player {i+1}", f"Player {i+1}")
-            players.append(player_name)
-        submit = st.form_submit_button("Start Game")
+    submit = st.form_submit_button("Start Game")
+        # players = []
+        # for i in range(int(num_players)):
+        #     player_name = st.text_input(f"Enter name for Player {i+1}", f"Player {i+1}")
+        #     players.append(player_name)
+
 
     
 
