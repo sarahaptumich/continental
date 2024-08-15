@@ -1,6 +1,7 @@
 import streamlit as st
 import uuid
 
+# Function to start a new game
 def start_new_game():
     # Generate and save the game_id in session state
     if 'game_id' not in st.session_state:
@@ -15,22 +16,25 @@ def start_new_game():
     
     # If the form is submitted, store the number of players in session state
     if submit:
-        st.session_state.num_players = int(num_players)
-        st.session_state.players = [""] * st.session_state.num_players  # Initialize empty player names list
+        st.session_state.num_players = num_players
+        st.session_state.players = [""] * num_players  # Initialize empty player names list
+        st.experimental_rerun()  # Force rerun to show player input fields
 
+# Function to enter player names
 def enter_player_names():
-    # Display text inputs for player names
     st.write("### Enter Player Names")
-    for i in range(st.session_state.num_players):
+    for i in range(int(st.session_state.num_players)):
         st.session_state.players[i] = st.text_input(f"Enter name for Player {i+1}", key=f"player_name_{i+1}")
 
     if st.button("Start Game"):
         st.write("Game has started!")
         st.write(f"Players: {', '.join(st.session_state.players)}")
 
+# Main function handling the game logic
 def new_game():
     st.title("Continental Card Game")
     
+    # If game_id is not initialized, start a new game
     if 'game_id' not in st.session_state:
         if st.button("Start New Game"):
             start_new_game()
@@ -41,6 +45,3 @@ def new_game():
 
 if __name__ == "__main__":
     new_game()
-
-
-
