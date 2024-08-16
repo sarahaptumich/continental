@@ -20,11 +20,11 @@ def start_new_game():
         num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
         submit_players_count = st.form_submit_button("Submit")
     
-    # If the number of players is submitted, initialize the player names list
+    # If the number of players is submitted, proceed to enter player names
     if submit_players_count:
         st.session_state.num_players = int(num_players)
-        st.session_state.players = [""] * st.session_state.num_players  # Initialize player names
-        st.session_state.scores = {f"Player {i+1}": [0]*7 for i in range(st.session_state.num_players)}  # Initialize scores for 7 rounds
+        st.session_state.players = [""] * st.session_state.num_players  # Initialize player names list
+        st.session_state.scores = {}  # Reset scores to ensure they are initialized with actual names
         st.session_state.game_started = False  # Set game started to False to show player name inputs
         st.rerun()  # Trigger rerun to proceed to the next step
 
@@ -32,12 +32,13 @@ def start_new_game():
 def enter_player_names():
     st.write("### Enter Player Names")
     with st.form("player_names_form"):
-        for i in range(int(st.session_state.num_players)):
+        for i in range(st.session_state.num_players):
             st.session_state.players[i] = st.text_input(f"Enter name for Player {i+1}", key=f"player_name_{i+1}")
         submit_player_names = st.form_submit_button("Submit Player Names")
     
-    # If player names are submitted, mark the game as started
+    # If player names are submitted, initialize scores with actual player names
     if submit_player_names:
+        st.session_state.scores = {player: [0] * 7 for player in st.session_state.players}  # Initialize scores with actual names
         st.session_state.game_started = True  # Set flag to indicate that the game can start
         st.rerun()  # Trigger rerun to proceed to the game
 
@@ -46,10 +47,6 @@ def enter_scores():
     st.write(f"### Enter Scores for Round {st.session_state.current_round}")
     with st.form("score_entry_form"):
         for player in st.session_state.players:
-            # Ensure the player key exists in the scores dictionary
-            if player not in st.session_state.scores:
-                st.session_state.scores[player] = [0] * 7  # Initialize with 7 rounds if not already initialized
-
             # Enter the score for the current round
             score = st.number_input(
                 f"Enter score for {player}", min_value=0, step=1, key=f"score_{player}_round_{st.session_state.current_round}"
@@ -92,7 +89,6 @@ def display_final_results():
     if st.button("Start New Game"):
         initialize_game()  # Reset the game state
         st.rerun()  # Trigger a rerun to begin the new game
-
 
 # Main function to control the flow of the game
 def new_game():
