@@ -72,7 +72,7 @@ def enter_scores():
     with st.form("score_entry_form"):
         for player in st.session_state.players:
             score = st.number_input(
-                f"Enter score for {player}", min_value=0, step=1, key=f"score_{player}_round_{st.session_state.current_round}"
+                f"Enter score for {player}", min_value=0, step=5, key=f"score_{player}_round_{st.session_state.current_round}"
             )
             st.session_state.scores[player][st.session_state.current_round - 1] = score  # Store score in the correct round
         submit_scores = st.form_submit_button("Submit Scores")
