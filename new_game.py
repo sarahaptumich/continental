@@ -1,6 +1,5 @@
 import streamlit as st
 import uuid
-import numpy as np
 import pandas as pd
 
 # Function to initialize the game and reset session state variables
@@ -17,7 +16,7 @@ def initialize_game():
 # Function to start a new game using a form to input the number of players
 def start_new_game():
     # Use a form to enter the number of players
-    with st.form("player_count_form", clear_on_submit=True):
+    with st.form("player_count_form"):
         num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
         submit_players_count = st.form_submit_button("Submit")
     
@@ -47,9 +46,10 @@ def enter_scores():
     st.write(f"### Enter Scores for Round {st.session_state.current_round}")
     with st.form("score_entry_form"):
         for i, player in enumerate(st.session_state.players):
-            st.session_state.scores[player][st.session_state.current_round - 1] = st.number_input(
+            score = st.number_input(
                 f"Enter score for {player}", min_value=0, step=1, key=f"score_{player}_round_{st.session_state.current_round}"
             )
+            st.session_state.scores[player][st.session_state.current_round - 1] = score  # Store score in the correct round
         submit_scores = st.form_submit_button("Submit Scores")
     
     # If scores are submitted, move to the next round or end the game
