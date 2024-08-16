@@ -64,12 +64,6 @@ def enter_scores():
         st.rerun()  # Trigger rerun to update the UI
 
 # Function to calculate the winner after all rounds
-def calculate_winner():
-    total_scores = {player: sum(scores) for player, scores in st.session_state.scores.items()}
-    winner = min(total_scores, key=total_scores.get)  # Winner is the player with the lowest score
-    return winner
-
-# Function to display the current tally
 def display_tally():
     st.write("### Current Tally")
 
@@ -91,9 +85,17 @@ def display_tally():
         
         # Add Game_ID and Status
         rounds_data["Game_ID"].append(st.session_state.game_id)
-        # Determine if the round is completed
-        is_completed = all(st.session_state.scores[player][round_num - 1] != 0 for player in players if round_num <= st.session_state.current_round)
-        rounds_data["Status"].append("COMPLETED" if is_completed else "OPEN")
+        
+        if round_num < st.session_state.current_round:
+            # If the round has already been completed
+            rounds_data["Status"].append("COMPLETED")
+        elif round_num == st.session_state.current_round:
+            # If the round is currently ongoing
+            is_completed = all(st.session_state.scores[player][round_num - 1] != 0 for player in players)
+            rounds_data["Status"].append("COMPLETED" if is_completed else "OPEN")
+        else:
+            # Future rounds that have not occurred
+            rounds_data["Status"].append("")
 
     # Add Total Points row
     for player in players:
@@ -108,9 +110,6 @@ def display_tally():
 
     # Display the DataFrame
     st.write(tally_df)
-
-
-
 
 # Function to display the final results
 def display_final_results():
