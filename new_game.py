@@ -1,8 +1,7 @@
 import streamlit as st
 import uuid
 import pandas as pd
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+
 
 
 # Function to initialize the game and reset session state variables
@@ -48,32 +47,31 @@ def enter_player_names():
 
 
 def append_round_to_google_sheet():
-    # Define the scope
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    try:
+        # Create a connection object to the Google Sheet
+        conn = st.connection("gsheets", type=GSheetsConnection)
 
-    # Add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name("path/to/your/credentials.json", scope)
+        # Prepare the data to be appended
+        data = []
+        for player in st.session_state.players:
+            data.append({
+                "Game_ID": st.session_state.game_id,
+                "Round": st.session_state.current_round,
+                "Player": player,
+                "Score": st.session_state.scores[player][st.session_state.current_round - 1],
+                "Status": "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
+            })
 
-    # Authorize the clientsheet 
-    client = gspread.authorize(creds)
+        # Convert the data to a DataFrame
+        df = pd.DataFrame(data)
 
-    # Get the Google Sheet
-    sheet = client.open_by_url(st.secrets["connections"]["gsheets"]["spreadsheet"]).sheet1
+        # Append the DataFrame to the Google Sheet
+        conn.write(df)
+        logging.info("Data successfully written to Google Sheet")
 
-    # Prepare the data to be appended
-    data = []
-    for player in st.session_state.players:
-        data.append([
-            st.session_state.game_id,
-            st.session_state.current_round,
-            player,
-            st.session_state.scores[player][st.session_state.current_round - 1],
-            "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
-        ])
-    
-    # Append each player's round data as a new row in the Google Sheet
-    for row in data:
-        sheet.append_row(row)
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        st.error("Failed to update Google Sheet. Please check the logs.")
 
 # Example usage in your main game function
 def enter_scores():
