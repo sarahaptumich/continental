@@ -125,7 +125,7 @@ def calculate_winner():
 # Function to display the final results
 def display_final_results():
     st.write("### Final Results")
-    st.write(f"Winner: {st.session_state.winner[0]}")
+    st.write(f"Winner: {st.session_state.winner[0]}, Score: {st.session_state.winner[1]}")
     st.write("Final Scores:")
     total_scores = {player: sum(scores) for player, scores in st.session_state.scores.items()}
     final_df = pd.DataFrame(list(total_scores.items()), columns=["Player", "Total Points"])
