@@ -28,7 +28,6 @@ def start_new_game():
         st.session_state.players = [""] * int(st.session_state.num_players)  # Initialize player names
         st.session_state.scores = {f"Player {i+1}": [0]*7 for i in range(st.session_state.num_players)}  # Initialize scores for 7 rounds
         st.session_state.game_started = False  # Set game started to False to show player name inputs
-        st.experimental_rerun()  # Force rerun to show the player name inputs
 
 # Function to input player names using a container
 def enter_player_names():
@@ -42,7 +41,6 @@ def enter_player_names():
     # If player names are submitted, mark the game as started
     if submit_player_names:
         st.session_state.game_started = True  # Set flag to indicate that the game can start
-        st.experimental_rerun()  # Force rerun to proceed to the game
 
 # Function to enter scores for the current round
 def enter_scores():
@@ -58,11 +56,9 @@ def enter_scores():
     if submit_scores:
         if st.session_state.current_round < 7:
             st.session_state.current_round += 1
-            st.experimental_rerun()
         else:
             st.session_state.game_completed = True
             st.session_state.winner = calculate_winner()
-            st.experimental_rerun()
 
 # Function to calculate the winner after all rounds
 def calculate_winner():
