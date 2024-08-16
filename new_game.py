@@ -72,8 +72,28 @@ def calculate_winner():
 # Function to display the current tally
 def display_tally():
     st.write("### Current Tally")
+
+    # Calculate total points for each player
     total_scores = {player: sum(scores[:st.session_state.current_round]) for player, scores in st.session_state.scores.items()}
-    tally_df = pd.DataFrame(list(total_scores.items()), columns=["Player", "Total Points"])
+
+    # Construct the DataFrame with all necessary columns
+    data = {
+        "game_id": [st.session_state.game_id] * len(st.session_state.players),
+        "player": st.session_state.players,
+    }
+    
+    # Add round scores to the DataFrame
+    for round_num in range(1, 8):
+        data[f"round{round_num}"] = [st.session_state.scores[player][round_num - 1] if round_num <= st.session_state.current_round else "" for player in st.session_state.players]
+
+    # Add total points and status to the DataFrame
+    data["Total Points"] = [total_scores[player] for player in st.session_state.players]
+    data["status"] = ["OPEN"] * len(st.session_state.players)
+
+    # Convert to DataFrame
+    tally_df = pd.DataFrame(data)
+    
+    # Display the DataFrame
     st.write(tally_df)
 
 # Function to display the final results
