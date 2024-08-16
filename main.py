@@ -22,7 +22,7 @@ def main():
         "Stats": show_stats
     }
     # Capture the user's choice from the sidebar
-    st.sidebar.markdown("### Navigate")
+    st.sidebar.markdown("# Navigate")
     selection = st.sidebar.radio("pages", list(pages.keys()), label_visibility="hidden")
 
     # Run the selected page function from the respective module
