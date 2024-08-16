@@ -45,7 +45,12 @@ def enter_player_names():
 def enter_scores():
     st.write(f"### Enter Scores for Round {st.session_state.current_round}")
     with st.form("score_entry_form"):
-        for i, player in enumerate(st.session_state.players):
+        for player in st.session_state.players:
+            # Ensure the player key exists in the scores dictionary
+            if player not in st.session_state.scores:
+                st.session_state.scores[player] = [0] * 7  # Initialize with 7 rounds if not already initialized
+
+            # Enter the score for the current round
             score = st.number_input(
                 f"Enter score for {player}", min_value=0, step=1, key=f"score_{player}_round_{st.session_state.current_round}"
             )
