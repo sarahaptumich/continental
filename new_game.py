@@ -2,7 +2,7 @@ import streamlit as st
 import uuid
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
-import logging
+
 
 
 
@@ -71,10 +71,8 @@ def append_round_to_google_sheet():
 
         # Append the DataFrame to the Google Sheet
         conn.update(worksheet="results", data=updated_df)
-        logging.info("Data successfully written to Google Sheet")
-
+        st.success('Database successfully updated!', icon="✅")
     except Exception as e:
-        logging.error(f"An error occurred: {e}")
         st.error("Failed to update Google Sheet. Please check the logs.")
 
 # Example usage in your main game function
