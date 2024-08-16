@@ -52,7 +52,8 @@ def append_round_to_google_sheet():
     try:
         # Create a connection object to the Google Sheet
         conn = st.connection("gsheets", type=GSheetsConnection)
-
+        existing_data= conn.read(worksheet="results", ttl=5)
+        existing_data= existing_data.dropna(how="all")
         # Prepare the data to be appended
         data = []
         for player in st.session_state.players:
@@ -61,14 +62,15 @@ def append_round_to_google_sheet():
                 "Round": st.session_state.current_round,
                 "Player": player,
                 "Score": st.session_state.scores[player][st.session_state.current_round - 1],
-                "Status": "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
+                "Status": "COMPLETED"
             })
 
         # Convert the data to a DataFrame
         df = pd.DataFrame(data)
+        updated_df= pd.concat([existing_data, df]), ignore_index=True)
 
         # Append the DataFrame to the Google Sheet
-        conn.write(df)
+        conn.update(worksheet="results", data=updated_df)
         logging.info("Data successfully written to Google Sheet")
 
     except Exception as e:
