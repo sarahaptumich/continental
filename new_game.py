@@ -91,11 +91,11 @@ def display_tally():
     data["Status"] = ["OPEN"] * len(st.session_state.players)
     
     # Convert to DataFrame
-    tally_df = pd.DataFrame(data[["Player", "Round 1", "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Total Points", "Status"]])
-)
+    tally_df = pd.DataFrame(data)
+    tally_short= tally_df[["Player", "Round 1", "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Total Points", "Status"]]
     
     # Display the DataFrame
-    st.write(tally_df.pivot())
+    st.write(tally_short.pivot())
 
 # Function to display the final results
 def display_final_results():
