@@ -84,7 +84,7 @@ def display_tally():
     
     # Add round scores to the DataFrame
     for round_num in range(1, 8):
-        data[f"round{round_num}"] = [st.session_state.scores[player][round_num - 1] if round_num <= st.session_state.current_round else "" for player in st.session_state.players]
+        data[f"Round {round_num}"] = [st.session_state.scores[player][round_num - 1] if round_num <= st.session_state.current_round else "" for player in st.session_state.players]
 
     # Add total points and status to the DataFrame
     data["Total Points"] = [total_scores[player] for player in st.session_state.players]
