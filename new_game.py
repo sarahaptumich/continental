@@ -111,6 +111,17 @@ def display_tally():
     # Display the DataFrame
     st.write(tally_df)
 
+def calculate_winner():
+    # Calculate the total points for each player based on completed rounds
+    total_scores = {player: sum(st.session_state.scores[player][:st.session_state.current_round]) for player in st.session_state.players}
+    
+    # Determine the winner by finding the player with the lowest total points
+    winner = min(total_scores, key=total_scores.get)
+    
+    # Return the winner's name and their total points
+    return winner, total_scores[winner]
+
+
 # Function to display the final results
 def display_final_results():
     st.write("### Final Results")
