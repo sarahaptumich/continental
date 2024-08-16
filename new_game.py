@@ -117,7 +117,7 @@ def new_game():
     # Check if the game has been initialized; if not, initialize it
     if 'game_id' not in st.session_state:
         initialize_game()
-    elif:
+    else:
         st.write("Game ID: ",st.session_state.game_id)
 
     # If the game is not started and player names have not been entered, ask for the number of players
