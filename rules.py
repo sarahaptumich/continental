@@ -37,8 +37,6 @@ def show_rules():
     bullet_points = [
         "Decrease the penalty points if someone closes.",
         "Being able to place the uncombined cards in the exposed foreign combinations, without being able to undo and divide the ladders and without putting repeated cards in these.",
-        "Be able to use exposed wildcards. After knocking down, any player can replace an exposed wild card with the card it represents and can use it on any other ladder.",
-        "The only reason to place it in another trio is to not be able to be used by other players.",
         "On the other hand, exposing has the disadvantage of facilitating the closure of another player."
     ]
     st.write("\n".join(f"- {point}" for point in bullet_points))
