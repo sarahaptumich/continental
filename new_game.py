@@ -43,25 +43,54 @@ def enter_player_names():
         st.rerun()  # Trigger rerun to proceed to the game
 
 # Function to enter scores for the current round
+import os
+import pandas as pd
+
 def enter_scores():
     st.write(f"### Enter Scores for Round {st.session_state.current_round}")
     with st.form("score_entry_form"):
         for player in st.session_state.players:
-            # Enter the score for the current round
             score = st.number_input(
-                f"Enter score for {player}", min_value=0, step=5, key=f"score_{player}_round_{st.session_state.current_round}"
+                f"Enter score for {player}", min_value=0, step=1, key=f"score_{player}_round_{st.session_state.current_round}"
             )
             st.session_state.scores[player][st.session_state.current_round - 1] = score  # Store score in the correct round
         submit_scores = st.form_submit_button("Submit Scores")
     
     # If scores are submitted, move to the next round or end the game
     if submit_scores:
+        # Write the new round scores to the CSV file
+        append_round_to_csv()
+        
         if st.session_state.current_round < 7:
             st.session_state.current_round += 1
         else:
             st.session_state.game_completed = True
             st.session_state.winner = calculate_winner()
         st.rerun()  # Trigger rerun to update the UI
+
+def append_round_to_csv():
+    # Prepare the data to be appended
+    data = []
+    for player in st.session_state.players:
+        data.append({
+            "Game_ID": st.session_state.game_id,
+            "Round": st.session_state.current_round,
+            "Player": player,
+            "Score": st.session_state.scores[player][st.session_state.current_round - 1],
+            "Status": "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
+        })
+    
+    # Convert the data to a DataFrame
+    df = pd.DataFrame(data)
+    
+    # File path
+    file_path = "game_results.csv"
+    
+    # Check if the file exists, if not, create it with headers
+    if not os.path.isfile(file_path):
+        df.to_csv(file_path, index=False)
+    else:
+        df.to_csv(file_path, mode='a', header=False, index=False)
 
 # Function to calculate the winner after all rounds
 def display_tally():
