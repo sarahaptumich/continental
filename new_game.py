@@ -79,7 +79,7 @@ def display_tally():
     # Construct the DataFrame with all necessary columns
     data = {
         "game_id": [st.session_state.game_id] * len(st.session_state.players),
-        "player": st.session_state.players,
+        "Player": st.session_state.players,
     }
     
     # Add round scores to the DataFrame
@@ -88,13 +88,14 @@ def display_tally():
 
     # Add total points and status to the DataFrame
     data["Total Points"] = [total_scores[player] for player in st.session_state.players]
-    data["status"] = ["OPEN"] * len(st.session_state.players)
-
+    data["Status"] = ["OPEN"] * len(st.session_state.players)
+    
     # Convert to DataFrame
-    tally_df = pd.DataFrame(data)
+    tally_df = pd.DataFrame(data[["Player", "Round 1", "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Total Points", "Status"]])
+)
     
     # Display the DataFrame
-    st.write(tally_df)
+    st.write(tally_df.pivot())
 
 # Function to display the final results
 def display_final_results():
