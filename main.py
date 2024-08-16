@@ -1,4 +1,4 @@
-import streamlit as st
+uimport streamlit as st
 from PIL import Image
 from rules import show_rules
 from new_game import new_game
@@ -22,8 +22,8 @@ def main():
         "Stats": show_stats
     }
     # Capture the user's choice from the sidebar
-    st.sidebar.markdown("# Navigate")
-    selection = st.sidebar.radio("pages", list(pages.keys()), label_visibility="hidden")
+    st.sidebar.markdown("## Menu")
+    selection = st.sidebar.radio("Menu", list(pages.keys()), label_visibility="hidden")
 
     # Run the selected page function from the respective module
     pages[selection]()
