@@ -1,4 +1,4 @@
-uimport streamlit as st
+import streamlit as st
 from PIL import Image
 from rules import show_rules
 from new_game import new_game
