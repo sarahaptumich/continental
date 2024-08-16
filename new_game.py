@@ -113,10 +113,12 @@ def display_final_results():
 # Main function to control the flow of the game
 def new_game():
     st.title("Continental Card Game")
-    st.write("Game ID: ",st.session_state.game_id)
+   
     # Check if the game has been initialized; if not, initialize it
     if 'game_id' not in st.session_state:
         initialize_game()
+    elif:
+        st.write("Game ID: ",st.session_state.game_id)
 
     # If the game is not started and player names have not been entered, ask for the number of players
     if not st.session_state.game_started and not st.session_state.players:
