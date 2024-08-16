@@ -16,31 +16,31 @@ def initialize_game():
 
 # Function to start a new game using a form to input the number of players
 def start_new_game():
-    st.session_state.game_id = str(uuid.uuid4())
-    
     # Use a form to enter the number of players
-    with st.form("player_count_form"):
-        st.session_state.num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
+    with st.form("player_count_form", clear_on_submit=True):
+        num_players = st.number_input("Number of Players", min_value=2, max_value=8, step=1)
         submit_players_count = st.form_submit_button("Submit")
     
     # If the number of players is submitted, initialize the player names list
     if submit_players_count:
-        st.session_state.players = [""] * int(st.session_state.num_players)  # Initialize player names
+        st.session_state.num_players = int(num_players)
+        st.session_state.players = [""] * st.session_state.num_players  # Initialize player names
         st.session_state.scores = {f"Player {i+1}": [0]*7 for i in range(st.session_state.num_players)}  # Initialize scores for 7 rounds
         st.session_state.game_started = False  # Set game started to False to show player name inputs
+        st.experimental_rerun()  # Trigger rerun to proceed to the next step
 
 # Function to input player names using a container
 def enter_player_names():
     st.write("### Enter Player Names")
-    with st.container():
-        with st.form("player_names_form"):
-            for i in range(int(st.session_state.num_players)):
-                st.session_state.players[i] = st.text_input(f"Enter name for Player {i+1}", key=f"player_name_{i+1}")
-            submit_player_names = st.form_submit_button("Submit Player Names")
+    with st.form("player_names_form"):
+        for i in range(int(st.session_state.num_players)):
+            st.session_state.players[i] = st.text_input(f"Enter name for Player {i+1}", key=f"player_name_{i+1}")
+        submit_player_names = st.form_submit_button("Submit Player Names")
     
     # If player names are submitted, mark the game as started
     if submit_player_names:
         st.session_state.game_started = True  # Set flag to indicate that the game can start
+        st.experimental_rerun()  # Trigger rerun to proceed to the game
 
 # Function to enter scores for the current round
 def enter_scores():
@@ -59,6 +59,7 @@ def enter_scores():
         else:
             st.session_state.game_completed = True
             st.session_state.winner = calculate_winner()
+        st.experimental_rerun()  # Trigger rerun to update the UI
 
 # Function to calculate the winner after all rounds
 def calculate_winner():
