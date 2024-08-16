@@ -88,6 +88,12 @@ def display_final_results():
     final_df = pd.DataFrame(list(total_scores.items()), columns=["Player", "Total Points"])
     st.write(final_df)
 
+    # Button to start a new game
+    if st.button("Start New Game"):
+        initialize_game()  # Reset the game state
+        st.rerun()  # Trigger a rerun to begin the new game
+
+
 # Main function to control the flow of the game
 def new_game():
     st.title("Continental Card Game")
