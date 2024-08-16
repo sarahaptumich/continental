@@ -1,3 +1,5 @@
 streamlit
-Pillow
 streamlit_gsheets
+pandas
+gspread
+oauth2client
