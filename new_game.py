@@ -135,8 +135,6 @@ def display_final_results():
     
     # Prepare the data for each round, similar to tally_df
     rounds_data = {player: [] for player in players}
-    rounds_data["Game_ID"] = []
-    rounds_data["Status"] = []
 
     # Populate the data for each round
     for round_num in range(1, 8):
@@ -145,30 +143,12 @@ def display_final_results():
                 rounds_data[player].append(st.session_state.scores[player][round_num - 1])
             else:
                 rounds_data[player].append("")
-        
-        # Add Game_ID and Status
-        rounds_data["Game_ID"].append(st.session_state.game_id)
-        
-        if round_num < st.session_state.current_round:
-            # If the round has already been completed
-            rounds_data["Status"].append("COMPLETED")
-        elif round_num == st.session_state.current_round:
-            # If the round is currently ongoing
-            is_completed = all(st.session_state.scores[player][round_num - 1] != 0 for player in players)
-            rounds_data["Status"].append("COMPLETED" if is_completed else "OPEN")
-        else:
-            # Future rounds that have not occurred
-            rounds_data["Status"].append("")
-
+    
     # Add Total Points row
     for player in players:
         rounds_data[player].append(sum(st.session_state.scores[player][:st.session_state.current_round]))
-    
-    # Add empty cells for Game_ID and Status in Total Points row
-    rounds_data["Game_ID"].append("")
-    rounds_data["Status"].append("")
 
-    # Create the final DataFrame, identical to tally_df
+    # Create the final DataFrame, identical to tally_df but without Game_ID and Status
     final_df = pd.DataFrame(rounds_data, index=[f"Round {i}" for i in range(1, 8)] + ["Total Points"])
 
     # Display the final DataFrame
