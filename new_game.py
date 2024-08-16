@@ -76,26 +76,39 @@ def display_tally():
     # Extract player names
     players = st.session_state.players
     
-    # Check if the current round is fully filled
-    is_completed = all(st.session_state.scores[players[i]][st.session_state.current_round - 1] != 0 for i in range(len(players)))
-
     # Prepare the data for each round
-    rounds_data = {
-        players[0]: [st.session_state.scores[players[0]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
-        players[1]: [st.session_state.scores[players[1]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
-        "Game_ID": [st.session_state.game_id] * 7 + [""],
-        "Status": ["COMPLETED" if is_completed else "OPEN"] * 7 + [""],
-    }
+    rounds_data = {player: [] for player in players}
+    rounds_data["Game_ID"] = []
+    rounds_data["Status"] = []
+
+    # Populate the data for each round
+    for round_num in range(1, 8):
+        for player in players:
+            if round_num <= st.session_state.current_round:
+                rounds_data[player].append(st.session_state.scores[player][round_num - 1])
+            else:
+                rounds_data[player].append("")
+        
+        # Add Game_ID and Status
+        rounds_data["Game_ID"].append(st.session_state.game_id)
+        # Determine if the round is completed
+        is_completed = all(st.session_state.scores[player][round_num - 1] != 0 for player in players if round_num <= st.session_state.current_round)
+        rounds_data["Status"].append("COMPLETED" if is_completed else "OPEN")
 
     # Add Total Points row
-    rounds_data[players[0]].append(sum(st.session_state.scores[players[0]][:st.session_state.current_round]))
-    rounds_data[players[1]].append(sum(st.session_state.scores[players[1]][:st.session_state.current_round]))
+    for player in players:
+        rounds_data[player].append(sum(st.session_state.scores[player][:st.session_state.current_round]))
+    
+    # Add empty cells for Game_ID and Status in Total Points row
+    rounds_data["Game_ID"].append("")
+    rounds_data["Status"].append("")
 
     # Create the DataFrame
     tally_df = pd.DataFrame(rounds_data, index=[f"Round {i}" for i in range(1, 8)] + ["Total Points"])
 
     # Display the DataFrame
     st.write(tally_df)
+
 
 
 
