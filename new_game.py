@@ -67,7 +67,7 @@ def append_round_to_google_sheet():
 
         # Convert the data to a DataFrame
         df = pd.DataFrame(data)
-        updated_df= pd.concat([existing_data, df]), ignore_index=True)
+        updated_df= pd.concat([existing_data, df], ignore_index=True)
 
         # Append the DataFrame to the Google Sheet
         conn.update(worksheet="results", data=updated_df)
