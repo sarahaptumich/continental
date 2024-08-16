@@ -1,6 +1,7 @@
 import streamlit as st
 import uuid
 import pandas as pd
+from streamlit_gsheets import GSheetsConnection
 
 # Function to initialize the game and reset session state variables
 def initialize_game():
@@ -42,10 +43,30 @@ def enter_player_names():
         st.session_state.game_started = True  # Set flag to indicate that the game can start
         st.rerun()  # Trigger rerun to proceed to the game
 
-# Function to enter scores for the current round
-import os
-import pandas as pd
 
+
+def append_round_to_google_sheet():
+    # Create a connection object to the Google Sheet
+    conn = st.connection("gsheets", type=GSheetsConnection)
+
+    # Prepare the data to be appended
+    data = []
+    for player in st.session_state.players:
+        data.append({
+            "Game_ID": st.session_state.game_id,
+            "Round": st.session_state.current_round,
+            "Player": player,
+            "Score": st.session_state.scores[player][st.session_state.current_round - 1],
+            "Status": "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
+        })
+
+    # Convert the data to a DataFrame
+    df = pd.DataFrame(data)
+
+    # Append the DataFrame to the Google Sheet
+    conn.write(df)
+
+# Example usage in your main game function
 def enter_scores():
     st.write(f"### Enter Scores for Round {st.session_state.current_round}")
     with st.form("score_entry_form"):
@@ -58,8 +79,8 @@ def enter_scores():
     
     # If scores are submitted, move to the next round or end the game
     if submit_scores:
-        # Write the new round scores to the CSV file
-        append_round_to_csv()
+        # Append the round scores to the Google Sheet
+        append_round_to_google_sheet()
         
         if st.session_state.current_round < 7:
             st.session_state.current_round += 1
@@ -68,29 +89,6 @@ def enter_scores():
             st.session_state.winner = calculate_winner()
         st.rerun()  # Trigger rerun to update the UI
 
-def append_round_to_csv():
-    # Prepare the data to be appended
-    data = []
-    for player in st.session_state.players:
-        data.append({
-            "Game_ID": st.session_state.game_id,
-            "Round": st.session_state.current_round,
-            "Player": player,
-            "Score": st.session_state.scores[player][st.session_state.current_round - 1],
-            "Status": "COMPLETED" if st.session_state.current_round <= 7 else "OPEN"
-        })
-    
-    # Convert the data to a DataFrame
-    df = pd.DataFrame(data)
-    
-    # File path
-    file_path = "game_results.csv"
-    
-    # Check if the file exists, if not, create it with headers
-    if not os.path.isfile(file_path):
-        df.to_csv(file_path, index=False)
-    else:
-        df.to_csv(file_path, mode='a', header=False, index=False)
 
 # Function to calculate the winner after all rounds
 def display_tally():
