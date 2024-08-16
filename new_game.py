@@ -95,7 +95,7 @@ def display_tally():
     tally_short= tally_df[["Player", "Round 1", "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Total Points", "Status"]]
     
     # Display the DataFrame
-    st.write(tally_short.pivot())
+    st.write(tally_short.pivot(columns='Player'))
 
 # Function to display the final results
 def display_final_results():
