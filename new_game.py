@@ -76,12 +76,15 @@ def display_tally():
     # Extract player names
     players = st.session_state.players
     
+    # Check if the current round is fully filled
+    is_completed = all(st.session_state.scores[players[i]][st.session_state.current_round - 1] != 0 for i in range(len(players)))
+
     # Prepare the data for each round
     rounds_data = {
         players[0]: [st.session_state.scores[players[0]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
         players[1]: [st.session_state.scores[players[1]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
         "Game_ID": [st.session_state.game_id] * 7 + [""],
-        "Status": ["COMPLETED" if st.session_state.game_completed else "OPEN"] * 7 + [""],
+        "Status": ["COMPLETED" if is_completed else "OPEN"] * 7 + [""],
     }
 
     # Add Total Points row
