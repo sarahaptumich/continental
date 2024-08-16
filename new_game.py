@@ -73,30 +73,27 @@ def calculate_winner():
 def display_tally():
     st.write("### Current Tally")
 
+    # Extract player names
+    players = st.session_state.players
+    
     # Prepare the data for each round
     rounds_data = {
-        "Round 1": [st.session_state.scores[player][0] for player in st.session_state.players],
-        "Round 2": [st.session_state.scores[player][1] if st.session_state.current_round >= 2 else "" for player in st.session_state.players],
-        "Round 3": [st.session_state.scores[player][2] if st.session_state.current_round >= 3 else "" for player in st.session_state.players],
-        "Round 4": [st.session_state.scores[player][3] if st.session_state.current_round >= 4 else "" for player in st.session_state.players],
-        "Round 5": [st.session_state.scores[player][4] if st.session_state.current_round >= 5 else "" for player in st.session_state.players],
-        "Round 6": [st.session_state.scores[player][5] if st.session_state.current_round >= 6 else "" for player in st.session_state.players],
-        "Round 7": [st.session_state.scores[player][6] if st.session_state.current_round >= 7 else "" for player in st.session_state.players],
-        "Total Points": [sum(st.session_state.scores[player][:st.session_state.current_round]) for player in st.session_state.players],
+        players[0]: [st.session_state.scores[players[0]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
+        players[1]: [st.session_state.scores[players[1]][round_num - 1] if round_num <= st.session_state.current_round else "" for round_num in range(1, 8)],
+        "Game_ID": [st.session_state.game_id] * 7 + [""],
+        "Status": ["COMPLETED" if st.session_state.game_completed else "OPEN"] * 7 + [""],
     }
 
-    # Add Game_ID and Status columns
-    rounds_data["Game_ID"] = [st.session_state.game_id] * (7 + 1)
-    rounds_data["Status"] = ["COMPLETED" if st.session_state.game_completed else "OPEN"] * (7 + 1)
+    # Add Total Points row
+    rounds_data[players[0]].append(sum(st.session_state.scores[players[0]][:st.session_state.current_round]))
+    rounds_data[players[1]].append(sum(st.session_state.scores[players[1]][:st.session_state.current_round]))
 
-    # Create DataFrame
-    tally_df = pd.DataFrame(rounds_data, index=["one", "two", "Game_ID", "Status"])
-
-    # Transpose the DataFrame to match the desired format
-    tally_df = tally_df.transpose()
+    # Create the DataFrame
+    tally_df = pd.DataFrame(rounds_data, index=[f"Round {i}" for i in range(1, 8)] + ["Total Points"])
 
     # Display the DataFrame
     st.write(tally_df)
+
 
 
 # Function to display the final results
